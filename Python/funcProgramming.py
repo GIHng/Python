@@ -12,7 +12,7 @@ def f(x):
     return x * x
 
 
-temp = list(map(f, li))  c
+temp = list(map(f, li))
 print(temp)  # map 이용한 변환.
 
 temp = list(map(lambda x : x*x, li))  # 처리할 내용이 한 줄 이므로 lambda로 처리함.
