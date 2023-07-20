@@ -15,6 +15,7 @@ for dic in kbo:
 
 
 
+
 #
 # li3 = [li1, li2]  # 배열로 추가하면 이들을 구분할 수 있는 이름을 넣을 수 없음.
 # # list는 index를 이용해서 접근하고 dict는 key를 이용해서 접근

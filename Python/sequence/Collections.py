@@ -17,7 +17,7 @@ data = [("APPLE", 3), ("APPLE", 2),("ORANGE", 3), ("MANGO", 3), ("ORANGE", 5)]
 counter = Counter()
 
 # 데이터가 등장한 횟수 구하기
-for name, count in data:
+for name in data[0][0]:
     counter[name] += 1
 print('데이터가 등장한 횟수 구하기', dict(counter))
 
