@@ -1,16 +1,10 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+import pymysql
+import sys
+try:
+    con = pymysql.connect(host='localhost', port=3306, db='adam', user='root', passwd='wnddkd', charset='utf8')
+    print(con)
+except:
+    print("예외 발생", sys.exc_info)
+finally:
+    if con != None:
+        con.close()
