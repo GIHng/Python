@@ -1,16 +1,33 @@
-# This is a sample Python script.
+# 접속
+import redis
+import time
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Connect_pool - 직접 연결을 생성해서 해제하는 방식을 사용해도 되지만, 미리 연결을 만들어두고 빌려쓰는 방식을 이용
+redis_pool = redis.ConnectionPool(host='localhost', port=6379, max_connections=4)
+with redis.StrictRedis(connection_pool=redis_pool) as conn:
+    conn.set("name", "이름")
+
+    data = conn.get("name")
+    # 문자열 가져오기 - bytes로 리턴
+    print(data)  # 한글은 decoding 해야 정상 출력
+    print(data.decode('utf8'))  # 디코딩 결과 출력.
+
+    conn.set("name", "이름", 10)
+    # 만료 시간 확인
+    print(conn.ttl("name")) # time to live
+
+    conn.set("song", "노래")
+
+    # 만료 시간 설정 가능함.
+    conn.expire('song', 10)
+
+    print(conn.get("song"))
+    time.sleep(11)
+    print(conn.get("song"))
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    conn.lpush("album", "genesis")
+    conn.rpush("album", "exodus")
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    for album in conn.lrange("album", 0, 10):
+        print(album)

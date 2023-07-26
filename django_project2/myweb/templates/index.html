@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>
+        {% for temp in data %}
+            <div>{{temp.itemid}} - <a href="detail/{{temp.itemid}}">{{temp.itemname}}</a> - {{temp.description}}</div>
+        {% endfor %}
+    </p>
+</body>
+</html>
