@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="display"></div>
+    <button id="btn"> button </button>
+
+    bid <input type="text" id="bid" />
+    <button id="getbook"> 데이터 1개 가져오기</button>
+</body>
+<script>
+    document.getElementById("getbook").addEventListener('click',
+        (e)=>{
+            // id가 bid인 입력의 값을 가져오기
+            let bid = document.getElementById('bid').value
+            alert(bid)
+
+            let request = new XMLHttpRequest();
+            request.open('GET', '../example/fbv/book/' + bid, true)
+            request.send('')
+            request.addEventListener('load', (e) => {
+                let data = JSON.parse(request.responseText)
+                let txt = ''
+
+                if('detail' in data){
+                    txt = '<h3> 해당되는 bid가 없습니다.</h3>'
+                }
+                else{
+                    txt += '<h3>' + data.bid + '</h3>'
+                    txt += '<h3>' + data.title + '</h3>'
+                    txt += '<h3>' + data.category + '</h3>'
+                }
+                document.getElementById('display').innerHTML = txt
+            })
+        })
+    document.getElementById("btn").addEventListener("click", (e)=>{
+        // 출력하는 함수에 객체를 대입하면 toString 메서드를 호출한다.
+        // python은 __str__ 메서드를 호출한다.
+        // 위 메서드를 재정의하면 그 내용이 출력되지만
+        // 재정의하지 않으면 기본적으로 설정된 출력.
+        let request = new XMLHttpRequest()
+        alert(request)
+
+        //요청을 생성
+        // request.open('전송방식', 'url', '비동기여부');
+        request.open('GET', '../example/fbv/books', true);
+        request.send('')
+        request.addEventListener('load', (e) => {
+            alert(request.responseText)
+
+            // 데이터로 변환
+            // 객체들의 변환
+            // let data = JSON.parse(request.responseText);
+            // let txt = ''
+            // for (let item of data){
+            //     txt += '<h3>' + item.title + '</h3>';
+            //     txt += '<p>' + item.price + '</p>';
+            //     txt += '<p>' + item.author + '</p>';
+            // }
+            // document.getElementById('display').innerHTML = txt;
+            // alert(data)
+        })
+    })
+
+</script>
+</html>
